@@ -1,0 +1,15 @@
+<ul class="navbar-nav mr-auto">
+  <li class="nav-item">
+    <%= link_to "Meus Pets", person_root_path, class: "nav-link" %>
+  </li>
+</ul>
+<ul class="navbar-nav ml-auto">
+  <li class="nav-item dropdown">
+    <%= link_to "#", id: "navbarDropdown", class: "nav-link dropdown-toggle", role: "button", data: { toggle: "dropdown" }, aria: { haspopup: "true", expanded: "false" } do %>
+      <%= fa_icon 'user-circle 2' %>
+    <% end %>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+      <%= link_to "sair", destroy_person_session_path, class: "dropdown-item", method: :delete %>
+    </div>
+  </li>
+</ul>

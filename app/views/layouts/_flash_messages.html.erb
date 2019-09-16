@@ -1,0 +1,18 @@
+<% flash.delete(:timedout).each do |key, value| %>
+  <% unless value.blank? %>
+    <div class="flash alert <%= bootstrap_alert_class_for(key) %>" role='alert'>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <% if value.class === [] %>
+        <%= value.join("<br>").html_safe %>
+      <% elsif value.class === {} %>
+        <% value.each do |k, v| %>
+          <%= "#{k.html_safe}: #{v.first.html_safe}" %><br />
+        <% end %>
+      <% else %>
+        <%= value.html_safe %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

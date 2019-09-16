@@ -1,0 +1,10 @@
+<% if object.errors.present? %>
+  <h5 class="text-muted">Encontramos aluns erros ao atualizar</h5>
+  <ul class="list-group mb-4">
+    <% object.errors.full_messages.each do |msg| %>
+      <li class="list-group-item text-warning">
+        <%= msg %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

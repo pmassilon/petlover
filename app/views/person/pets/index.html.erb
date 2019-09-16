@@ -1,0 +1,47 @@
+<h1>Pets</h1>
+
+<div class="row mt-4">
+  <div class="col">
+    <div class="card">
+      <div class="card-body">
+        <table class="table mt-4">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nome</th>
+              <th scope="col">Espécie</th>
+              <th scope="col">Custo Mensal</th>
+              <th scope="col">Custo Trimensal</th>
+              <th scope="col" class="text-right">
+                <%= link_to fa_icon('plus-circle', text:'Adicionar novo Pet'), @index_presenter[:links][:new][:path], class: 'btn btn-primary' %>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @index_presenter[:pets].each do |pet_presenter| %>
+              <tr>
+                <th scope="row"><%= pet_presenter[:slug] %></th>
+                <td><%= pet_presenter[:name] %></td>
+                <td><%= pet_presenter[:kind] %></td>
+                <td><%= pet_presenter[:monthly_cost][:format] %></td>
+                <td><%= pet_presenter[:quarterly_cost][:format] %></td>
+                <td class="text-right">
+                  <%= link_to fa_icon('pencil', text: 'Editar'), pet_presenter[:links][:edit][:path], class: "btn btn-outline-primary" %>
+                  <%= link_to fa_icon('trash', text: 'Remover'), pet_presenter[:links][:delete][:path], method: :delete, class: "btn btn-outline-danger", data: { confirm: "Tem certeza que deseja remover o Pet #{pet_presenter[:name]} da sua lista?"} %>
+                </td>
+              </tr>
+            <% end %>
+            <tr>
+              <th scope="row" colspan="3">
+              <td><b><%= @index_presenter[:total_monthly_cost] %></b></td>
+              <td><b><%= @index_presenter[:quarterly_cost] %></b></td>
+              <td class="text-right">
+                <%= link_to fa_icon('plus-circle', text:'Adicionar novo Pet'), @index_presenter[:links][:new][:path], class: 'btn btn-primary' %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

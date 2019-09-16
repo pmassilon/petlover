@@ -1,0 +1,11 @@
+<ul class="navbar-nav ml-auto">
+  <li class="nav-item active">
+    <% if controller_name != 'sessions' %>
+      <%= link_to "Logar", new_person_session_path, class: "nav-link" %>
+    <% end %>
+
+    <% if devise_mapping.registerable? && controller_name != 'registrations' %>
+      <%= link_to "Registar", new_person_registration_path, class: "nav-link" %>
+    <% end %>
+  </li>
+</ul>
