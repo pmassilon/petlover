@@ -27,8 +27,8 @@ class Pet < ApplicationRecord
   scope :active, -> { where(deleted_at: nil) }
 
   def slug_candidates
-    prefix = I18n.t("pets.kinds.#{kind}")[0].strip
-    sufixo = name[0].strip
+    prefix = I18n.t("pets.kinds.#{kind}").to_s.first.strip
+    sufixo = name.to_s.first.strip
     ["#{prefix}#{sufixo}#{SecureRandom.hex(1)}", "#{prefix}#{sufixo}#{SecureRandom.hex(2)}", "#{prefix}#{sufixo}#{SecureRandom.hex(4)}"]
   end
 
@@ -37,7 +37,7 @@ class Pet < ApplicationRecord
   end
 
   def valid_monthly_cost
-    return errors.add(:monthly_cost, 'não possui um valor válido') unless monthly_cost.positive?
+    return errors.add(:monthly_cost, 'não possui um valor válido') unless monthly_cost.present? && monthly_cost.positive?
   end
 
   def quarterly_cost
