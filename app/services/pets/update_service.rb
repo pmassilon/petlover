@@ -2,12 +2,13 @@ module Pets
   class UpdateService < BaseService
     def initialize(pet, params)
       @pet = pet
-      @person = @pet.person
       @params = params
     end
 
     def call
-      OpenStruct.new(success?: false, message: 'Desculpe mas tivemos uma dificuldade ao atualizar o cadastro do seu Pet') unless pet || params
+      return OpenStruct.new(success?: false, message: 'Desculpe mas tivemos uma dificuldade ao atualizar o cadastro do seu Pet.') unless (pet.present? && params.present?)
+
+      @person = @pet.person
 
       params[:monthly_cost] = FixedParams.money(params[:monthly_cost])
 
@@ -20,11 +21,11 @@ module Pets
 
       pet.save!
 
-      OpenStruct.new(success?: true)
+      OpenStruct.new(success?: true, message: "O Pet #{pet.name.titleize} foi atualizado.")
     rescue StandardError => e
       Rails.logger.error e
 
-      OpenStruct.new(success?: false, pet: pet, message: "Desculpe mas tivemos uma dificuldade ao atualizar o cadastro do seu Pet #{ pet.name.titleize }")
+      OpenStruct.new(success?: false, pet: pet, message: "Desculpe mas tivemos uma dificuldade ao atualizar o cadastro do seu Pet #{ pet.name.titleize }.")
     end
 
     private

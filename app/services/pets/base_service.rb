@@ -5,7 +5,7 @@ module Pets
       return OpenStruct.new(success?: false, pet: pet, message: "Desculpe mas você não pode ter um Gato.") unless person.can_had_cats? if pet.cat?
       return OpenStruct.new(success?: false, pet: pet, message: "Desculpe mas você não pode ter uma Andorinha.") unless person.can_had_swallows? if pet.swallow?
 
-      OpenStruct.new(success?: true)
+      OpenStruct.new(success?: true, message: 'Pode registrar o Pet')
     end
 
     def can_change?(person, pet)
@@ -16,7 +16,7 @@ module Pets
       return OpenStruct.new(success?: false, pet: pet, message: "Desculpe mas você não pode ter um Gato.") unless person.can_had_cats? if pet.kind_changed? && pet.cat?
       return OpenStruct.new(success?: false, pet: pet, message: "Desculpe mas você não pode ter uma Andorinha.") unless person.can_had_swallows? if pet.kind_changed? && pet.swallow?
 
-      OpenStruct.new(success?: true)
+      OpenStruct.new(success?: true, message: 'Pode atualizar o Pet')
     end
   end
 end

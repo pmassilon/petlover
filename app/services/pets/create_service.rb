@@ -6,7 +6,7 @@ module Pets
     end
 
     def call
-      OpenStruct.new(success?: false, message: 'Desculpe mas tivemos uma dificuldade ao cadastrar o seu Pet') unless person || params
+      return OpenStruct.new(success?: false, message: 'Desculpe mas tivemos uma dificuldade ao cadastrar o seu Pet.') unless (person.present? && params.present?)
 
       params[:monthly_cost] = FixedParams.money(params[:monthly_cost])
 
