@@ -5,7 +5,9 @@ module People
     end
 
     def call
-      people.map { |person| person(person) }
+      hash = {
+        people: people.map { |person| person(person) }
+      }
     end
 
     private
